@@ -13,7 +13,7 @@
     ];
 
     packages = [inputs.home-manager.packages.${pkgs.system}.default];
-    home-manager.users.justin = 
-      import ../../../home/justin/${config.networking.hostName}.nix
-  }
+  };
+  home-manager.users.justin = 
+    import ../../../home/justin/${config.networking.hostName}.nix;
 }

@@ -70,6 +70,8 @@
   git
 	kitty
 	vscode
+  firefox
+  gnome-keyring
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

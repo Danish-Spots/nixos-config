@@ -13,7 +13,7 @@ in {
     home.packages = with pkgs; [
       grim
       hyprlock
-      qt6.wayland
+      qt6.qtwayland
       slurp
       wlogout
     ];

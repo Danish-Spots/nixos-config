@@ -174,56 +174,58 @@ in {
         }
       '';
       settings = {
-        layer = "top";
-        position = "top";
-        mode = "dock";
-        exclusive = true;
-        passthrough = true;
-        gtk-layer-shell = true;
-        height = 0;
-        modules-left = ["user" "custom/weather" "tray"];
-        modules-center = ["hyprland/workspaces"];
-        modules-right = [
-          "mpris" 
-          "privacy" 
-          "cpu" 
-          "memory" 
-          "clock"
-        ];
+        mainbar = {
+          layer = "top";
+          position = "top";
+          mode = "dock";
+          exclusive = true;
+          passthrough = true;
+          gtk-layer-shell = true;
+          height = 0;
+          modules-left = ["user" "custom/weather" "tray"];
+          modules-center = ["hyprland/workspaces"];
+          modules-right = [
+            "mpris" 
+            "privacy" 
+            "cpu" 
+            "memory" 
+            "clock"
+          ];
 
-        "hyprland/workspaces" = {
-          disable-scroll = true;
-          format  =  " {name} ";
-          format-icons = {
-            "1" = "";
-            "2" = "";
-            "3" = "";
-            "4" = "";
-            "5" = "";
+          "hyprland/workspaces" = {
+            disable-scroll = true;
+            format  =  " {name} ";
+            format-icons = {
+              "1" = "";
+              "2" = "";
+              "3" = "";
+              "4" = "";
+              "5" = "";
+            };
+            persistent_workspaces = {
+              "1" = [];
+              "2" = [];
+              "3" = [];
+              "5" = [];
+            };
           };
-          persistent_workspaces = {
-            "1" = [];
-            "2" = [];
-            "3" = [];
-            "5" = [];
+          
+          "custom/weather" = {
+            format = "{}°C";
+            tooltip = true;
+            interval = 3600;
+            exec = "wttrbar --location Soroe";
+            return-type = "json";
           };
-        };
-        
-        "custom/weather" = {
-          format = "{}°C";
-          tooltip = true;
-          interval = 3600;
-          exec = "wttrbar --location Soroe";
-          return-type = "json";
-        };
-        tray = {
-          icon-size = 13;
-          spacing = 10;
-        };
-        clock = {
-          format = " {:%R   %d/%m}";
-          tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
-        };
+          tray = {
+            icon-size = 13;
+            spacing = 10;
+          };
+          clock = {
+            format = " {:%R   %d/%m}";
+            tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
+          };
+        };        
       };
     };
 

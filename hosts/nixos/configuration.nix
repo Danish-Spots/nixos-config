@@ -104,6 +104,9 @@
   # Hyprland
   programs.hyprland.enable = true;
 
+  # Fish
+  programs.fish.enable = true;
+
   # Nvidia
   hardware.graphics.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];

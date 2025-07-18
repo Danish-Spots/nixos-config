@@ -1,5 +1,13 @@
 { config, ... }: { 
-  imports = [ ./home.nix ../common ../features/cli ]; 
+  imports = [ 
+    ./home.nix 
+    ../common 
+    ../features/cli
+    ../features/desktop 
+  ]; 
 
-  features.cli.fish.enable = true;  
+  features.cli.fish.enable = true;
+  features.desktop.wayland.enable = true;
+  features.desktop.waybar.enable = true;
+
 }

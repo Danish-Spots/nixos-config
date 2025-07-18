@@ -31,16 +31,16 @@
         forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
       overlays = import ./overlays { inherit inputs; };
       nixosConfigurations = {
-        machan = nixpkgs.lib.nixosSystem {
+        nixos = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs outputs; };
-          modules = [ ./hosts/machan ];
+          modules = [ ./hosts/nixos ];
         };
       };
       homeConfigurations = {
-        "justin@machan" = home-manager.lib.homeManagerConfiguration {
+        "justin@nixos" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages."x86_64-linux";
           extraSpecialArgs = { inherit inputs outputs; };
-          modules = [ ./home/justin/machan.nix ];
+          modules = [ ./home/justin/nixos.nix ];
         };
       };
     };

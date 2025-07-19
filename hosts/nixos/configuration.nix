@@ -113,6 +113,7 @@
 
   # Hyprland
   programs.hyprland.enable = true;
+  programs.hyprland.withUWSM = true;
 
   # Fish
   programs.fish.enable = true;

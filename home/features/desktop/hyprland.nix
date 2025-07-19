@@ -10,6 +10,7 @@ in {
 
   config = mkIf cfg.enable {
     wayland.windowManager.hyprland = {
+      systemd.enable = false;
       enable = true;
       settings = {
         xwayland = {
@@ -17,13 +18,16 @@ in {
         };
 
         exec-once = [
-          "waybar"
+          "uwsm app -- waybar"
+          "uwsm app -- walker --gapplication-service"
         ];
 
         env = [
           "XCURSOR_SIZE,32"
           "WLR_NO_HARDWARE_CURSORS,1"
           # "GTK_THEME,Dracula"
+          "LIBVA_DRIVER_NAME,nvidia"
+          "__GLX_VENDOR_LIBRARY_NAME,nvidia"
         ];
 
         input = {
@@ -127,11 +131,11 @@ in {
 
         bind = [
           # "$mainMod, return, exec, kitty -e zellij-ps"
-          "$mainMod, q, exec, kitty -e fish -c 'neofetch; exec fish'"
+          "$mainMod, q, exec, uwsm app -- kitty"
           # "$mainMod SHIFT, e, exec, kitty -e zellij_nvim"
           # "$mainMod, o, exec, thunar"
-          "$mainMod, l, exec, wlogout -p layer-shell"
-          "$mainMod, Space, exec, wofi --show drun --allow-images"
+          "$mainMod, l, exec, uwsm app -- wlogout -p layer-shell"
+          "$mainMod, Space, exec, walker"
           "$mainMod, c, killactive"
           "$mainMod, M, exit"
           "$mainMod, F, fullscreen"

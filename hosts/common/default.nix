@@ -1,6 +1,11 @@
 # Common configuration for all hosts
-
-{ pkgs, lib, inputs, outputs, ... }: {
+{
+  pkgs,
+  lib,
+  inputs,
+  outputs,
+  ...
+}: {
   imports = [
     ./users
     inputs.home-manager.nixosModules.home-manager
@@ -36,20 +41,23 @@
 
   nix = {
     settings = {
-      experimental-features = "nix-command flakes";
       trusted-users = [
         "root"
         "justin"
       ]; # Set users that are allowed to use the flake command
+      substituters = ["https://walker.cachix.org"];
+      trusted-public-keys = ["walker.cachix.org-1:fG8q+uAaMqhsMxWjwvk0IMb4mFPFLqHjuvfwQxE4oJM="];
+      experimental-features = "nix-command flakes";
     };
     gc = {
       automatic = true;
       options = "--delete-older-than 30d";
     };
     optimise.automatic = true;
-    registry = (lib.mapAttrs (_: flake: { inherit flake; }))
+    registry =
+      (lib.mapAttrs (_: flake: {inherit flake;}))
       ((lib.filterAttrs (_: lib.isType "flake")) inputs);
-    nixPath = [ "/etc/nix/path" ];
+    nixPath = ["/etc/nix/path"];
   };
   users.defaultUserShell = pkgs.fish;
 }

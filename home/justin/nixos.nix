@@ -10,4 +10,5 @@
   features.desktop.wayland.enable = true;
   features.desktop.waybar.enable = true;
   features.desktop.hyprland.enable = true;
+  features.desktop.walker.enable = true;
 }

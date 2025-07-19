@@ -1,13 +1,13 @@
-{ config, ... }: { 
-  imports = [ 
-    ./home.nix 
-    ../common 
+{config, ...}: {
+  imports = [
+    ./home.nix
+    ../common
     ../features/cli
-    ../features/desktop 
-  ]; 
+    ../features/desktop
+  ];
 
   features.cli.fish.enable = true;
   features.desktop.wayland.enable = true;
   features.desktop.waybar.enable = true;
-
+  features.desktop.hyprland.enable = true;
 }

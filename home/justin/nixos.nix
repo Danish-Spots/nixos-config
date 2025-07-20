@@ -11,4 +11,8 @@
   features.desktop.waybar.enable = true;
   features.desktop.hyprland.enable = true;
   features.desktop.walker.enable = true;
+  features.desktop.swaync.enable = true;
+  features.desktop.swww.enable = true;
+  features.desktop.hyprlock.enable = true;
+  features.desktop.hypridle.enable = true;
 }

@@ -14,6 +14,8 @@ in {
     programs.walker = {
       enable = true;
       runAsService = true;
+
+      config = importTOML ./walker.toml;
     };
   };
 }

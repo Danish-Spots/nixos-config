@@ -25,6 +25,8 @@
   # environment.
   home.packages = with pkgs; [
     kitty
+    htop
+    neovim
 
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.

@@ -4,14 +4,17 @@
   pkgs,
   ...
 }:
-with lib;
-let  cfg = config.features.desktop.waybar;
+with lib; let
+  cfg = config.features.desktop.waybar;
 in {
   options.features.desktop.waybar.enable = mkEnableOption "enable waybar and config";
 
   config = mkIf cfg.enable {
     programs.waybar = {
       enable = true;
+      systemd = {
+        enable = true;
+      };
       style = ''
         @define-color background-darker rgba(30, 31, 41, 230);
         @define-color background #282a36;
@@ -185,16 +188,16 @@ in {
           modules-left = ["user" "custom/weather" "tray"];
           modules-center = ["hyprland/workspaces"];
           modules-right = [
-            "mpris" 
-            "privacy" 
-            "cpu" 
-            "memory" 
+            "mpris"
+            "privacy"
+            "cpu"
+            "memory"
             "clock"
           ];
 
           "hyprland/workspaces" = {
             disable-scroll = true;
-            format  =  " {name} ";
+            format = " {name} ";
             format-icons = {
               "1" = "";
               "2" = "";
@@ -209,7 +212,7 @@ in {
               "5" = [];
             };
           };
-          
+
           "custom/weather" = {
             format = "{}°C";
             tooltip = true;
@@ -225,7 +228,7 @@ in {
             format = " {:%R   %d/%m}";
             tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
           };
-        };        
+        };
       };
     };
 

@@ -18,8 +18,7 @@ in {
         };
 
         exec-once = [
-          "uwsm app -- waybar"
-          "uwsm app -- walker --gapplication-service"
+          # "walker --gapplication-service"
         ];
 
         env = [
@@ -131,7 +130,7 @@ in {
 
         bind = [
           # "$mainMod, return, exec, kitty -e zellij-ps"
-          "$mainMod, q, exec, uwsm app -- kitty"
+          "$mainMod, q, exec, kitty"
           # "$mainMod SHIFT, e, exec, kitty -e zellij_nvim"
           # "$mainMod, o, exec, thunar"
           "$mainMod, l, exec, uwsm app -- wlogout -p layer-shell"
@@ -183,6 +182,8 @@ in {
           # "workspace 3,opacity 1.0, class:(brave-browser)"
           # "workspace 4,class:(com.obsproject.Studio)"
         ];
+
+        "debug:disable_logs" = true;
       };
     };
   };

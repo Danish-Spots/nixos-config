@@ -36,6 +36,7 @@ in {
             font-weight: bold;
             font-size: 14px;
             min-height: 0;
+            margin-top: 10px;
         }
 
         window#waybar {
@@ -96,7 +97,6 @@ in {
             background: #1e1e2e;
             padding: 0px 10px;
             margin: 3px 0px;
-            margin-top: 10px;
             border: 1px solid #181825;
         }
 
@@ -192,27 +192,42 @@ in {
             "privacy"
             "cpu"
             "memory"
+            "network"
+            "custom/notification"
             "clock"
           ];
 
           "hyprland/workspaces" = {
             disable-scroll = true;
-            format = " {name} ";
+            format = " {icon}";
             format-icons = {
-              "1" = "";
-              "2" = "";
-              "3" = "";
-              "4" = "";
-              "5" = "";
+              active = "";
+              default = "";
+              empty = "";
             };
-            persistent_workspaces = {
-              "1" = [];
-              "2" = [];
-              "3" = [];
-              "5" = [];
+            persistent-workspaces = {
+              "*" = [
+                1
+                2
+                3
+                4
+                5
+              ];
             };
           };
-
+          "custom/notification" = {
+            tooltip = false;
+            format = "";
+            on-click = "swaync-client -t -sw";
+            escape = true;
+          };
+          network = {
+            format-ethernet = "";
+            format-disconnected = "";
+            tooltip-format-disconnected = "Error";
+            tooltip-format-ethernet = "{ifname}";
+            on-click = "kitty nmtui";
+          };
           "custom/weather" = {
             format = "{}°C";
             tooltip = true;

@@ -15,4 +15,5 @@
   features.desktop.swww.enable = true;
   features.desktop.hyprlock.enable = true;
   features.desktop.hypridle.enable = true;
+  features.desktop.hyprpolkitagent.enable = true;
 }

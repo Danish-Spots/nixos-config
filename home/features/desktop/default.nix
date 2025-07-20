@@ -8,6 +8,7 @@
     ./swww.nix
     ./hyprlock/hyprlock.nix
     ./hypridle.nix
+    ./hyprpolkitagent.nix
   ];
 
   home.packages = with pkgs; [

@@ -126,6 +126,7 @@
   services.xserver.videoDrivers = ["nvidia"];
   hardware.nvidia.open = true;
 
-  # File manager
+  # Extra features
   features.thunar.enable = true;
+  features.steam.enable = true;
 }

@@ -10,6 +10,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ../features
   ];
 
   # Bootloader.
@@ -124,4 +125,7 @@
   hardware.graphics.enable = true;
   services.xserver.videoDrivers = ["nvidia"];
   hardware.nvidia.open = true;
+
+  # File manager
+  features.thunar.enable = true;
 }

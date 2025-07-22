@@ -77,6 +77,8 @@
     gnome-keyring
     nixd
     alejandra
+    nvd
+    jq
   ];
   fonts.packages = with pkgs;
     [
@@ -125,6 +127,7 @@
   hardware.graphics.enable = true;
   services.xserver.videoDrivers = ["nvidia"];
   hardware.nvidia.open = true;
+  hardware.nvidia-container-toolkit.mount-nvidia-executables = true;
 
   # Extra features
   features.thunar.enable = true;

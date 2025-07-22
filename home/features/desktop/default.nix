@@ -1,7 +1,7 @@
 {pkgs, ...}: {
   imports = [
     ./wayland.nix
-    ./waybar.nix
+    ./waybar/waybar.nix
     ./hyprland.nix
     ./walker/walker.nix
     ./swaync.nix
@@ -9,6 +9,7 @@
     ./hyprlock/hyprlock.nix
     ./hypridle.nix
     ./hyprpolkitagent.nix
+    ./playerctld.nix
   ];
 
   home.packages = with pkgs; [

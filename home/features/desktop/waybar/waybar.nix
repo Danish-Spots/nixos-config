@@ -292,12 +292,11 @@ in {
             exec = "nvidia-util";
           };
           "custom/nix-updates" = {
-            exec = "nix-updates";
-            signal = 12;
-            interval = 3600;
-            tooltip = true;
-            return-type = "json";
             format = "{}";
+            exec = "cat ~/.cache/nix-update/waybar.json";
+            on-click = "nix-updates";
+            return-type = "json";
+            interval = 0;
           };
 
           mpris = {

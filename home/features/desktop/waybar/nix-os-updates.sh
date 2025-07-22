@@ -1,137 +1,74 @@
 #!/usr/bin/env bash
 
-# NixOS Flake Update Checker for Waybar
-# Outputs number of pending flake updates (but does not apply them)
-# Uses Nerd Font icons in "text" field
-# Caches state in ~/.cache/nix-updates
+# === Config ===
+NIX_CONFIG="$HOME/projects/nixcfg"
+CACHE_DIR="$HOME/.cache/nix-update"
+JSON_OUT="$CACHE_DIR/waybar.json"
 
-# ===== Config =====
-NIXOS_CONFIG_PATH="$HOME/projects/nixcfg"
-CACHE_DIR="$HOME/.cache/nix-updates"
-STATE_FILE="$CACHE_DIR/state.json"
-BOOT_MARKER_FILE="$CACHE_DIR/boot-marker"
+ICON_DIR="$HOME/.icons"
+HOST=$(hostname)
 
-CHECK_INTERVAL=3600  # seconds
-SKIP_AFTER_BOOT=true
-GRACE_PERIOD=60
+# Ensure cache dir exists
+mkdir -p "$CACHE_DIR"
 
-# ===== Nerd Font Icons =====
-ICON_UPDATED="󰗠"       # nf-fa-check
-ICON_HAS_UPDATES="󰚰"   # nf-fa-wrench
-ICON_ERROR="󰀦"         # nf-fa-exclamation_triangle
-ICON_CHECKING="󰓦"      # nf-fa-refresh
+# === Functions ===
 
-# ===== Dependency Check =====
-function check_dependencies() {
-    local missing=()
-
-    for cmd in nix nvd jq; do
-        command -v "$cmd" &>/dev/null || missing+=("$cmd")
-    done
-
-    if [ "${#missing[@]}" -ne 0 ]; then
-        local tooltip="Missing dependencies: ${missing[*]}"
-        echo "{\"text\":\"$ICON_ERROR !\",\"alt\":\"error\",\"tooltip\":\"$tooltip\",\"timestamp\":$(date +%s)}"
-        exit 1
-    fi
+function notify() {
+    local icon="$1"
+    local title="$2"
+    local msg="$3"
+    notify-send  "$title" "$msg" -e
 }
 
-# ===== Grace Period After Boot =====
-function in_grace_period() {
-    local now=$(date +%s)
-    local uptime=$(awk '{print int($1)}' /proc/uptime)
-    local boot_time=$((now - uptime))
-
-    if [ ! -f "$BOOT_MARKER_FILE" ]; then
-        echo "$now" > "$BOOT_MARKER_FILE"
-        return 0
-    fi
-
-    local last_boot=$(cat "$BOOT_MARKER_FILE")
-    (( now - last_boot < GRACE_PERIOD )) && return 0
-
-    return 1
+function output_json() {
+    local count="$1"
+    local tooltip="$2"
+    local alt="$3"
+    echo "{\"text\":\"$count\", \"tooltip\":\"$tooltip\", \"alt\":\"$alt\"}" > "$JSON_OUT"
 }
 
-# ===== Should We Run Check Now =====
-function should_check() {
-    if [ ! -f "$STATE_FILE" ]; then
-        return 0
-    fi
-
-    local last_check
-    last_check=$(jq -r '.timestamp // 0' "$STATE_FILE")
-    local now=$(date +%s)
-    (( now - last_check >= CHECK_INTERVAL ))
-}
-
-# ===== Run Flake Update in Temp =====
 function check_updates() {
     local tmpdir
     tmpdir=$(mktemp -d)
-    trap "rm -rf '$tmpdir'" EXIT
+    trap "rm -rf $tmpdir" EXIT
 
-    cp -r "$NIXOS_CONFIG_PATH" "$tmpdir/config"
-    cd "$tmpdir/config" || return 1
+    cd "$tmpdir" || exit 1
+    cp -r "$NIX_CONFIG"/* .
 
-    nix flake update &>/dev/null || {
-        echo "{\"text\":\"$ICON_ERROR !\",\"alt\":\"error\",\"tooltip\":\"Flake update failed\",\"timestamp\":$(date +%s)}" > "$STATE_FILE"
+    notify "updates-checking" "Checking for Updates" "Please wait..."
+
+    # Update flake
+    if ! nix flake update > /dev/null 2>&1; then
+        notify "updates-failed" "Update Check Failed" "flake update failed"
+        output_json "!" "flake update failed" "error"
         return 1
-    }
+    fi
 
-    local diff_output
-    diff_output=$(nvd diff "$NIXOS_CONFIG_PATH/flake.lock" "$tmpdir/config/flake.lock" 2>/dev/null)
+    # Build system
+    if ! nix build ".#nixosConfigurations.$HOST.config.system.build.toplevel" > /dev/null 2>&1; then
+        notify "updates-failed" "Update Check Failed" "nixos build failed"
+        output_json "!" "nixos build failed" "error"
+        return 1
+    fi
 
-    local updates=0
-    local tooltip_lines=()
+    # Compare with current system
+    local diff
+    diff=$(nvd diff /run/current-system ./result)
 
-    while IFS= read -r line; do
-        if [[ "$line" =~ \[U.*\] ]]; then
-            ((updates++))
-            local name old new
-            name=$(echo "$line" | awk '{print $2}')
-            old=$(echo "$line" | awk '{print $3}')
-            new=$(echo "$line" | awk '{print $5}')
-            tooltip_lines+=("$name: $old → $new")
-        fi
-    done <<< "$diff_output"
-
-    local tooltip
-    if (( updates == 0 )); then
-        tooltip="System up to date"
-        echo "{\"text\":\"$ICON_UPDATED 0\",\"alt\":\"updated\",\"tooltip\":\"$tooltip\",\"timestamp\":$(date +%s)}" > "$STATE_FILE"
+    if echo "$diff" | grep -q '\[U'; then
+        # Updates found
+        local updates
+        updates=$(echo "$diff" | grep -c '\[U')
+        local summary
+        summary=$(echo "$diff" | grep '\[U' | awk '{ for (i=3; i<NF; i++) printf $i " "; if (NF >= 3) print $NF; }' ORS='\\n')
+        notify "updates-pending" "Updates Available" "$updates packages can be updated"
+        output_json "$updates" "$summary" "has-updates"
     else
-        tooltip=$(printf "%s\n" "${tooltip_lines[@]}" | sed 's/"/\\"/g')
-        echo "{\"text\":\"$ICON_HAS_UPDATES $updates\",\"alt\":\"has-updates\",\"tooltip\":\"$tooltip\",\"timestamp\":$(date +%s)}" > "$STATE_FILE"
+        # No updates
+        notify "updates-complete" "System Up to Date" "No updates found"
+        output_json "0" "System is up to date" "updated"
     fi
 }
 
-# ===== Output Cached State or Fallback =====
-function output_json() {
-    if [ -s "$STATE_FILE" ]; then
-        cat "$STATE_FILE"
-    else
-        echo "{\"text\":\"$ICON_CHECKING ?\",\"alt\":\"unknown\",\"tooltip\":\"No update data\",\"timestamp\":$(date +%s)}"
-    fi
-}
-
-# ===== Main Entrypoint =====
-function main() {
-    mkdir -p "$CACHE_DIR"
-    check_dependencies
-
-    if $SKIP_AFTER_BOOT && in_grace_period; then
-        output_json
-        exit 0
-    fi
-
-    if should_check; then
-        if ! check_updates; then
-            :
-        fi
-    fi
-
-    output_json
-}
-
-main
+# === Run ===
+check_updates

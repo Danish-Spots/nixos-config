@@ -24,7 +24,7 @@ function output_json() {
     local count="$1"
     local tooltip="$2"
     local alt="$3"
-    echo "{\"text\":\"$count\", \"tooltip\":\"$tooltip\", \"alt\":\"$alt\"}" > "$JSON_OUT"
+    echo "{\"text\":\"󱄅 $count\", \"tooltip\":\"$tooltip\", \"alt\":\"$alt\"}" > "$JSON_OUT"
 }
 
 function check_updates() {

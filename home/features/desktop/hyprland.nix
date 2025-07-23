@@ -13,16 +13,16 @@ in {
     wayland.windowManager.hyprland = {
       systemd.enable = false;
       enable = true;
+      importantPrefixes = ["output" "source" "$" "bezier"];
       settings = {
         "$mainMod" = "SUPER";
         source = "/home/$USER/.cache/wal/colors-hyprland.conf";
-        # monitorv2 = {
-        #   output = "";
-        #   mode = "3840x2160@120";
-        #   scale = 1.0;
-        # };
+        monitorv2 = {
+          output = "";
+          mode = "3840x2160@120";
+          scale = 1.0;
+        };
 
-        monitor = ",3840x2160@120,auto,auto";
         animations = {
           enabled = true;
           bezier = [

@@ -295,6 +295,7 @@ in {
             format = "{}";
             exec = "cat ~/.cache/nix-update/waybar.json";
             on-click = "nix-updates";
+            on-right-click = "cat ~/.cache/nix-update/waybar.json";
             return-type = "json";
             interval = 0;
           };

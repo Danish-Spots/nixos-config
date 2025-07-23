@@ -79,6 +79,7 @@
     alejandra
     nvd
     jq
+    dconf-editor
   ];
   fonts.packages = with pkgs;
     [

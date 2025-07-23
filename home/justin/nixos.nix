@@ -22,5 +22,6 @@
     hyprpolkitagent.enable = true;
     playerctld.enable = true;
     hyprshot.enable = true;
+    gtk.enable = true;
   };
 }

@@ -9,6 +9,7 @@ in {
   options.features.desktop.hyprland.enable = mkEnableOption "hyprland config";
 
   config = mkIf cfg.enable {
+    xdg.configFile."uwsm/env".source = "${config.home.sessionVariablesPackage}/etc/profile.d/hm-session-vars.sh";
     wayland.windowManager.hyprland = {
       systemd.enable = false;
       enable = true;

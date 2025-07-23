@@ -11,6 +11,7 @@
     ./hyprpolkitagent.nix
     ./playerctld.nix
     ./hyprshot/hyprshot.nix
+    ./gtk.nix
   ];
 
   home.packages = with pkgs; [

@@ -21,6 +21,6 @@
     hypridle.enable = true;
     hyprpolkitagent.enable = true;
     playerctld.enable = true;
-    grim.enable = true;
+    hyprshot.enable = true;
   };
 }

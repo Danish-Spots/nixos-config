@@ -10,7 +10,7 @@
     ./hypridle.nix
     ./hyprpolkitagent.nix
     ./playerctld.nix
-    ./grim/grim.nix
+    ./hyprshot/hyprshot.nix
   ];
 
   home.packages = with pkgs; [

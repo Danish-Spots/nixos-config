@@ -19,7 +19,7 @@
     swww.enable = true;
     hyprlock.enable = true;
     hypridle.enable = true;
-    hyprpolkitagent.enable = true;
+    hyprpolkitagent.enable = false;
     playerctld.enable = true;
     hyprshot.enable = true;
     gtk.enable = true;

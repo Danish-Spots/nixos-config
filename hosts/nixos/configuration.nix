@@ -133,4 +133,6 @@
   # Extra features
   features.thunar.enable = true;
   features.steam.enable = true;
+
+  security.soteria.enable = true;
 }

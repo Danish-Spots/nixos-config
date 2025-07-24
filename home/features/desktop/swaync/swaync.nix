@@ -11,7 +11,7 @@ in {
   config = mkIf cfg.enable {
     xdg.configFile = builtins.listToAttrs (map (file: {
         name = "swaync/${file}";
-        value.source = ./style + "/${file}";
+        value.source = ./styles + "/${file}";
       }) [
         "buttons-grid.css"
         "control-center.css"

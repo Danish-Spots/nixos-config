@@ -1,0 +1,53 @@
+:root {
+    --bg-button-color: @color7;
+    --bg-button-background: @color4;
+    --bg-button-hover-color: @color15;
+    --bg-button-checked-background: color9;
+    --bg-button-checked-color: @background;
+}
+
+.widget-buttons-grid {
+    font-family: "CodeNewRoman Nerd Font Propo";
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-bottom: 8px;
+    margin: 10px;
+    border-radius: 12px;
+    background: transparent;
+}
+
+
+.widget-buttons-grid>flowbox>flowboxchild>button label {
+    font-size: 20px;
+    color: var(--bg-button-color);
+    transition: all .7s ease;
+}
+
+.widget-buttons-grid>flowbox>flowboxchild>button:hover label {
+    font-size: 20px;
+    color: var(--bg-button-hover-color);
+    transition: all .7s ease;
+}
+
+.widget-buttons-grid>flowbox>flowboxchild>button {
+    background: transparent;
+    border-radius: 12px;
+    text-shadow: none;
+    box-shadow: 0px 0px 8px rgba(255, 255, 255, .02);
+    transition: all .5s ease;
+}
+
+.widget-buttons-grid>flowbox>flowboxchild>button:hover {
+    background: var(--bg-button-background);
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, .2);
+    transition: all .5s ease;
+
+}
+
+.widget-buttons-grid>flowbox>flowboxchild>button.toggle:checked {
+    background: var(--bg-button-checked-background);
+}
+
+.widget-buttons-grid>flowbox>flowboxchild>button.toggle:checked label {
+    color: var(--bg-button-checked-background);
+}

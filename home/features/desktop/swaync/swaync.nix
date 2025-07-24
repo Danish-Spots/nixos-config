@@ -9,6 +9,18 @@ in {
   options.features.desktop.swaync.enable = mkEnableOption "enable swaync and its config";
 
   config = mkIf cfg.enable {
+    xdg.configFile = builtins.listToAttrs (map (file: {
+        name = "swaync/${file}";
+        value.source = ./style + "/${file}";
+      }) [
+        "buttons-grid.css"
+        "control-center.css"
+        "mpris.css"
+        "notification-row.css"
+        "style.css"
+        "title.css"
+        "volume.css"
+      ]);
     services.swaync = {
       enable = true;
       # Uncomment below to configure swaync
@@ -52,10 +64,16 @@ in {
             button-text = "󰩹";
           };
           mpris = {
-            blacklist = ["playerctld"];
+            # blacklist = ["playerctld"];
           };
           volume = {
             label = "󰕾";
+            show-per-app = true;
+            show-per-app-icon = false;
+            show-per-app-label = true;
+            expand-button-label = "󰞖";
+            collapse-button-label = "󰞕";
+            animation-type = "slide_up";
           };
 
           buttons-grid = {
@@ -93,9 +111,6 @@ in {
       };
 
       # Uncomment below to style swaync
-      # style = ''
-
-      # '';
     };
   };
 }

@@ -1,0 +1,65 @@
+:root {
+    --trough-background: @color9;
+}
+
+trough {
+    border-radius: 20px;
+    background: transparent;
+}
+
+trough highlight {
+    padding: 5px;
+    background: var(--trough-background);
+    border-radius: 20px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, .5);
+    transition: all .7s ease;
+}
+
+trough highlight:hover {
+    padding: 5px;
+    background: var(--trough-background);
+    border-radius: 20px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 1);
+    transition: all .7s ease;
+}
+
+trough slider {
+    background: transparent;
+}
+
+trough slider:hover {
+    background: transparent;
+}
+
+.widget-volume {
+    background-color: transparent;
+    padding: 8px;
+    margin: 8px;
+    border-radius: 12px;
+}
+
+.widget-volume>box>button {
+    background: transparent;
+    border-radius: 12px;
+    text-shadow: none;
+    box-shadow: 0px 0px 8px rgba(255, 255, 255, .02);
+    transition: all .5s ease;
+}
+
+.widget-volume>box>button label {
+    font-size: 20px;
+    color: var(--bg-button-color);
+    transition: all .7s ease;
+}
+
+.widget-volume>box>button:hover {
+    background: var(--bg-button-background);
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, .2);
+    transition: all .5s ease;
+}
+
+.widget-volume>box>button:hover label {
+    font-size: 20px;
+    color: var(--bg-button-hover-color);
+    transition: all .7s ease;
+}

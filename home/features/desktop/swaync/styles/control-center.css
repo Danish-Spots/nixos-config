@@ -1,0 +1,31 @@
+/* @import url('../../.cache/wal/colors-waybar.css'); */
+
+
+:root {
+    --control-center-notification-background: @color9;
+    --control-center-background: alpha(@background, 0.5);
+    --control-center-box-shadow: 1px 1px 5px alpha(@background, 0.65);
+    --control-center-color: @color15;
+}
+
+.control-center {
+    background: var(--control-center-background);
+  border-radius: 16px;
+  border: none;
+  margin: 10px;
+  box-shadow: var(--control-center-box-shadow);
+  color: var(--control-center-color);
+}
+.control-center .control-center-list-placeholder {}
+.control-center .control-center-list {
+    padding-bottom: 0..5rem;
+}
+.control-center .control-center-list .notification {
+    margin-top: 0.5rem;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, .3);
+    background: alpha(var(--control-center-notification-background),.3);
+}
+.control-center .control-center-list .notification .notification-default-action {}
+.control-center .control-center-list .notification .notification-default-action:hover {}
+.control-center .control-center-list .notification .notification-action {}
+.control-center .control-center-list .notification .notification-action:hover {}

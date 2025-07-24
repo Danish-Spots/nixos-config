@@ -1,0 +1,132 @@
+:root {
+    --notification-row-notification-background: alpha(@color9, 0.6);
+    --notification-row-notification-background-hover: alpha(@color9, 0.9);
+    --notification-row-notification-title: @color15;
+    --notification-row-notification-text: @color15;
+    --notification-row-notification-time: @color15;
+    --notification-row-close-button-background: alpha(@background, 0.5);
+    --notification-row-close-button-color: @color15;
+    --notification-group-header: @color15;
+
+
+}
+
+.notification-row {
+    background-color: unset;
+}
+
+.notification-row .notification-background .close-button {
+    all: unset;
+    background-color: unset;
+    border-radius: 0%;
+    border: none;
+    box-shadow: none;
+    margin-right: 0px;
+    margin-top: 3px;
+    margin-bottom: unset;
+    padding-bottom: unset;
+    min-height: 20px;
+    min-width: 20px;
+    text-shadow: none;
+    color: var(--notification-row-close-button-color);
+}
+
+.notification-row .notification-background .close-button:hover {
+    all: unset;
+    background-color: var(--notification-row-close-button-background);
+    border-radius: 100%;
+    border: none;
+    box-shadow: none;
+    margin-right: 0px;
+    margin-top: 3px;
+    margin-bottom: unset;
+    padding-bottom: unset;
+    min-height: 20px;
+    min-width: 20px;
+    text-shadow: none;
+    color: var(--notification-row-close-button-color);
+}
+
+.notification-row .notification-background .notification {
+    background: var(--notification-row-notification-background);
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, .3)
+}
+
+.notification-row .notification-background .notification .notification-default-action:hover {
+    background: var(--notification-row-notification-background-hover);
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content {
+    padding-top: 0.818rem;
+    padding-bottom: 0.818rem;
+    padding-right: unset;
+    margin-right: unset;
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content label {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content .text-box .summary {
+    color: var(--notification-row-notification-title);
+    margin-bottom: 5px;
+    font-family: 'CodeNewRoman Nerd Font Propo';
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content .text-box .time {
+    color: var(--notification-row-notification-time);
+    font-size: 16px;
+    font-weight: 500;
+    margin-right: 1rem;
+    padding-right: unset;
+}
+
+.notification-row .notification-background .notification .notification-default-action .notification-content .text-box .body {
+    color: var(--notification-row-notification-text);
+    font-family: 'CodeNewRoman Nerd Font Propo';
+    font-size: 16px;
+    font-weight: 400;
+    padding-right: unset;
+    margin-right: unset;
+}
+
+.notification-group {
+    background: unset;
+}
+
+.notification-group .notification-group-headers {
+    margin-bottom: 5px;
+
+}
+
+.notification-group .notification-group-headers .notification-group-icon {
+    color: var(--notification-group-header);
+    font-size: 24px;
+    font-weight: 700;
+    margin-right: 6px;
+
+}
+
+.notification-group .notification-group-headers .notification-group-header {
+    color: var(--notification-group-header);
+    font-family: 'CodeNewRoman Nerd Font Propo';
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.notification-group .notification-group-buttons button {
+    background: transparent;
+    border-radius: 12px;
+    text-shadow: none;
+    box-shadow: 0px 0px 8px rgba(255, 255, 255, .02);
+    transition: all .5s ease;
+}
+
+.notification-group .notification-group-buttons button:hover {
+    background: var(--bg-button-background);
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, .2);
+    transition: all .5s ease;
+}

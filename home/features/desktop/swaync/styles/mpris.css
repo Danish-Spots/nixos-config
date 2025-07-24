@@ -1,0 +1,72 @@
+:root {
+  --mpris-album-art-overlay: alpha(@background, 0.55);
+  --mpris-album-art-icon-size: 120px;
+  --mpris-album-art-shadow: 3px 3px 3px alpha(@background, 0.75);
+  --mpris-border-radius: 16px;
+  --mpris-button-color: @color15;
+  --mpris-button-hover-background: alpha(@background, 0.5);
+}
+
+
+.widget-mpris {
+  padding: 0;
+}
+
+.widget-mpris .widget-mpris-player {
+  margin: 16px 20px;
+  border-radius: var(--mpris-border-radius);
+  box-shadow: var(--mpris-album-art-shadow);
+}
+
+.widget-mpris .widget-mpris-player .mpris-background {
+  /* NOTE: GTK may not support this, but keeping for compositors like Hyprland */
+  filter: blur(15px);
+}
+
+.widget-mpris .widget-mpris-player .mpris-overlay {
+  padding: 16px;
+  background-color: var(--mpris-album-art-overlay);
+}
+
+.widget-mpris .widget-mpris-player .mpris-overlay button {
+  color: var(--mpris-button-color);
+  text-shadow: none;
+  border-radius: 15px;
+  border: none;
+  padding: 5px;
+  margin: 5px;
+  transition: all 0.5s ease;
+}
+
+
+.widget-mpris .widget-mpris-player .mpris-overlay .widget-mpris-album-art {
+  border-radius: var(--mpris-border-radius);
+  box-shadow: var(--mpris-album-art-shadow);
+  -gtk-icon-size: var(--mpris-album-art-icon-size);
+}
+
+.widget-mpris .widget-mpris-player .mpris-overlay .widget-mpris-title {
+  margin-left: 16px;
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+
+.widget-mpris .widget-mpris-player .mpris-overlay .widget-mpris-subtitle {
+  margin-left: 24px;
+  font-size: 1.1rem;
+}
+
+.widget-mpris .widget-mpris-player .mpris-overlay>box>button:hover {
+  background: var(--mpris-button-hover-background);
+  text-shadow: none;
+  border-radius: 15px;
+  border: none;
+  padding: 5px;
+  margin: 5px;
+  transition: all 0.5s ease;
+}
+
+.widget-mpris>box>button:hover {
+  background: var(--mpris-button-hover-background);
+
+}

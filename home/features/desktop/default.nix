@@ -4,7 +4,7 @@
     ./waybar/waybar.nix
     ./hyprland.nix
     ./walker/walker.nix
-    ./swaync.nix
+    ./swaync/swaync.nix
     ./swww.nix
     ./hyprlock/hyprlock.nix
     ./hypridle.nix

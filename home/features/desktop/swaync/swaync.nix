@@ -23,7 +23,6 @@ in {
       ]);
     services.swaync = {
       enable = true;
-      # Uncomment below to configure swaync
       settings = {
         ignore-gtk-theme = true;
         positionX = "right";
@@ -36,8 +35,6 @@ in {
         notification-inline-replies = true;
         notification-window-width = 500;
         notification-icon-size = 60;
-        # notification-body-image-height = 180;
-        # notification-body-image-width = 180;
 
         timeout = 12;
         timeout-low = 6;
@@ -64,7 +61,7 @@ in {
             button-text = "󰩹";
           };
           mpris = {
-            # blacklist = ["playerctld"];
+            blacklist = ["playerctld"];
           };
           volume = {
             label = "󰕾";
@@ -109,8 +106,6 @@ in {
           };
         };
       };
-
-      # Uncomment below to style swaync
     };
   };
 }

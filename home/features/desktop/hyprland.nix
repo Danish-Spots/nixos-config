@@ -144,6 +144,7 @@ in {
         env = [
           "LIBVA_DRIVER_NAME,nvidia"
           "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+          "XCURSOR_THEME,Bibata-Modern-Ice"
         ];
 
         windowrule = [
@@ -169,8 +170,11 @@ in {
           "blur, swaync-notification-window"
           "ignorezero, swaync-control-center"
           "ignorezero, swaync-notification-window"
-          "ignorealpha 0.5, swaync-control-center"
-          "ignorealpha 0.5, swaync-notification-window"
+          "ignorealpha 0.4, swaync-control-center"
+          "ignorealpha 0.4, swaync-notification-window"
+
+          "animation slide right, swaync-control-center"
+          "animation slide right, swaync-notification-window"
 
           "noanim, selection"
         ];

@@ -306,6 +306,9 @@ in {
             player-icons = {
               firefox = "󰈹";
             };
+            # ignored-players = [
+            #   "firefox"
+            # ];
             status-icons = {
               paused = "󰏤";
               playing = "󰐊";

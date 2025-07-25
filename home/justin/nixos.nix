@@ -9,6 +9,7 @@
   features.cli = {
     fish.enable = true;
     pywal16.enable = true;
+    nvf.enable = true;
   };
   features.desktop = {
     wayland.enable = true;

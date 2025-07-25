@@ -86,7 +86,8 @@ in {
         bind = [
           "$mainMod, q, exec, kitty"
           "$mainMod, l, exec, hyprlock"
-          "$mainMod, Space, exec, walker"
+          "$mainMod, Space, exec, wofi --show drun --allow-images -i -n"
+          "$mainMod SHIFT, Space, exec, select-wallpaper"
           "$mainMod, c, killactive"
           "$mainMod, M, exit"
           "$mainMod, P, pseudo"

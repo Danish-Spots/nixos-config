@@ -12,6 +12,7 @@
     ./playerctld.nix
     ./hyprshot/hyprshot.nix
     ./gtk.nix
+    ./wofi/wofi.nix
   ];
 
   home.packages = with pkgs; [

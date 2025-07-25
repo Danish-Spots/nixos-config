@@ -15,7 +15,7 @@
     wayland.enable = true;
     waybar.enable = true;
     hyprland.enable = true;
-    walker.enable = true;
+    walker.enable = false;
     swaync.enable = true;
     swww.enable = true;
     hyprlock.enable = true;
@@ -24,5 +24,6 @@
     playerctld.enable = true;
     hyprshot.enable = true;
     gtk.enable = true;
+    wofi.enable = true;
   };
 }

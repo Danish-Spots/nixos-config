@@ -24,6 +24,9 @@
     playerctld.enable = true;
     hyprshot.enable = true;
     gtk.enable = true;
-    wofi.enable = true;
+    wofi = {
+      enable = true;
+      hyprlandIntegration.enable = true;
+    };
   };
 }

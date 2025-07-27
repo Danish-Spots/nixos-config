@@ -2,7 +2,7 @@
   imports = [
     ./wayland.nix
     ./waybar/waybar.nix
-    ./hyprland.nix
+    ./hyprland/hyprland.nix
     ./walker/walker.nix
     ./swaync/swaync.nix
     ./swww.nix
@@ -13,6 +13,7 @@
     ./hyprshot/hyprshot.nix
     ./gtk.nix
     ./wofi/wofi.nix
+    ./wlogout/wlogout.nix
   ];
 
   home.packages = with pkgs; [

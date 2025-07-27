@@ -9,6 +9,10 @@ WALLPAPER_DIR="@WALLPAPER_DIR@"
 # set -x 
 # echo "$PATH"
 
+if pidof wofi > /dev/null; then
+        exit 0
+fi
+
 menu() {
     find "${WALLPAPER_DIR}" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.gif" \) | awk '{print "img:"$0}'
 }

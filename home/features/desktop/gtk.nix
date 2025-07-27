@@ -15,6 +15,7 @@ in {
     # };
     gtk = {
       enable = true;
+      # Note for some reason cursors need to be set in hyprland conf as well :/
       cursorTheme = {
         name = "Bibata-Modern-Ice";
         package = pkgs.bibata-cursors;

@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
- exec >> /tmp/launch-app.log 2>&1
- echo "=== $(date) ==="
- set -x
+
+if pidof wofi > /dev/null; then
+        exit  0
+fi
+
 # Prompt user to select a .desktop app using wofi
 D=$(wofi --define=drun-print_desktop_file=true)
 

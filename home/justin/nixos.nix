@@ -13,8 +13,18 @@
   };
   features.desktop = {
     wayland.enable = true;
-    waybar.enable = true;
-    hyprland.enable = true;
+    waybar = {
+      enable = true;
+      hyprlandIntegration.enable = true;
+    };
+    hyprland = {
+      enable = true;
+      soteria.enable = true;
+      hyprshot.enable = true;
+      hyprlock.enable = true;
+      swaync.enable = true;
+      waybar.enable = true;
+    };
     walker.enable = false;
     swaync.enable = true;
     swww.enable = true;
@@ -25,6 +35,10 @@
     hyprshot.enable = true;
     gtk.enable = true;
     wofi = {
+      enable = true;
+      hyprlandIntegration.enable = true;
+    };
+    wlogout = {
       enable = true;
       hyprlandIntegration.enable = true;
     };

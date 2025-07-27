@@ -51,6 +51,12 @@ in {
               # lsp.server = "nixd";
               treesitter.enable = true;
             };
+            css = {
+              enable = true;
+              format.enable = true;
+              lsp.enable = true;
+              treesitter.enable = true;
+            };
             ts.enable = true;
           };
           utility = {snacks-nvim = {enable = true;};};

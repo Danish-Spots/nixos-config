@@ -6,6 +6,13 @@
 with lib; let
   cfg = config.features.desktop.hyprland;
 in {
+  imports = [
+    ./soteria.nix
+    ./hyprlock.nix
+    ./hyprshot.nix
+    ./swaync.nix
+    ./waybar.nix
+  ];
   options.features.desktop.hyprland.enable = mkEnableOption "hyprland config";
 
   config = mkIf cfg.enable {
@@ -83,52 +90,36 @@ in {
 
         "misc:focus_on_activate" = true;
 
-        bind = [
-          "$mainMod, q, exec, kitty"
-          "$mainMod, l, exec, hyprlock"
-          "$mainMod, c, killactive"
-          "$mainMod, M, exit"
-          "$mainMod, P, pseudo"
-          "$mainMod, F, fullscreen"
-          "$mainMod, V, togglefloating"
-          "$mainMod, J, togglesplit"
-          "$mainMod, escape, exec, wlogout -b 2"
-          # Cursor moving
-          "$mainMod, left, movefocus, l"
-          "$mainMod, right, movefocus, r"
-          "$mainMod, up, movefocus, u"
-          "$mainMod, down, movefocus, d"
-          #Window moving
-          "$mainMod SHIFT, left, movewindow, l"
-          "$mainMod SHIFT, right, movewindow, r"
-          "$mainMod SHIFT, up, movewindow, u"
-          "$mainMod SHIFT, down, movewindow, d"
-          ## Screenshotting
-          "$mainMod SHIFT, S, exec, screenshot-area"
-          ", Print, exec, screenshot-monitor"
-          "$mainMod, Print, exec, screenshot-window"
+        bind =
+          [
+            "$mainMod, q, exec, kitty"
+            "$mainMod, c, killactive"
+            "$mainMod, M, exit"
+            "$mainMod, P, pseudo"
+            "$mainMod, F, fullscreen"
+            "$mainMod, V, togglefloating"
+            "$mainMod, J, togglesplit"
+            # Cursor moving
+            "$mainMod, left, movefocus, l"
+            "$mainMod, right, movefocus, r"
+            "$mainMod, up, movefocus, u"
+            "$mainMod, down, movefocus, d"
+            #Window moving
+            "$mainMod SHIFT, left, movewindow, l"
+            "$mainMod SHIFT, right, movewindow, r"
+            "$mainMod SHIFT, up, movewindow, u"
+            "$mainMod SHIFT, down, movewindow, d"
+          ]
           # Workspace related"
-          "$mainMod, 1, workspace, 1"
-          "$mainMod, 2, workspace, 2"
-          "$mainMod, 3, workspace, 3"
-          "$mainMod, 4, workspace, 4"
-          "$mainMod, 5, workspace, 5"
-          "$mainMod, 6, workspace, 6"
-          "$mainMod, 7, workspace, 7"
-          "$mainMod, 8, workspace, 8"
-          "$mainMod, 9, workspace, 9"
-          "$mainMod, 0, workspace, 10"
-          "$mainMod SHIFT, 1, movetoworkspace, 1"
-          "$mainMod SHIFT, 2, movetoworkspace, 2"
-          "$mainMod SHIFT, 3, movetoworkspace, 3"
-          "$mainMod SHIFT, 4, movetoworkspace, 4"
-          "$mainMod SHIFT, 5, movetoworkspace, 5"
-          "$mainMod SHIFT, 6, movetoworkspace, 6"
-          "$mainMod SHIFT, 7, movetoworkspace, 7"
-          "$mainMod SHIFT, 8, movetoworkspace, 8"
-          "$mainMod SHIFT, 9, movetoworkspace, 9"
-          "$mainMod SHIFT, 0, movetoworkspace, 10"
-        ];
+          ++ (builtins.concatLists (builtins.genList (
+              i: let
+                ws = i + 1;
+              in [
+                "$mainMod, code:1${toString i}, workspace, ${toString ws}"
+                "$mainMod SHIFT, code:1${toString i}, movetoworkspace, ${toString ws}"
+              ]
+            )
+            9));
 
         bindm = [
           # Window resize
@@ -149,32 +140,9 @@ in {
         windowrule = [
           "float, title:Open File"
           "float, title:branchdialog"
-          #polkit agent rules
-          "pin,class:soteria"
-          "center,class:soteria"
-          "stayfocused,class:soteria"
-          "opaque,class:soteria"
-          "noscreenshare,class:soteria"
-          "dimaround,class:soteria"
-          "xray,class:soteria"
         ];
 
         layerrule = [
-          # Layer rules
-          "blur, waybar"
-          "ignorezero, waybar"
-          "ignorealpha 0.5, waybar"
-
-          "blur, swaync-control-center"
-          "blur, swaync-notification-window"
-          "ignorezero, swaync-control-center"
-          "ignorezero, swaync-notification-window"
-          "ignorealpha 0.4, swaync-control-center"
-          "ignorealpha 0.4, swaync-notification-window"
-
-          "animation slide right, swaync-control-center"
-          "animation slide right, swaync-notification-window"
-
           "noanim, selection"
         ];
       };

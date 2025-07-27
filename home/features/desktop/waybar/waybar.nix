@@ -11,8 +11,14 @@ with lib; let
   nvidiaUtilScript = pkgs.writeShellScriptBin "nvidia-util" (builtins.readFile ./nvidia-util.sh);
 in {
   options.features.desktop.waybar.enable = mkEnableOption "enable waybar and config";
+  options.features.desktop.waybar.hyprlandIntegration.enable = mkEnableOption "enable hyprland integration in waybar";
 
   config = mkIf cfg.enable {
+    wayland.windowManager.hyprland.settings = mkIf cfg.hyprlandIntegration.enable {
+      exec-once = [
+        "nix-updates"
+      ];
+    };
     home.packages = [
       pkgs.wttrbar
       nixUpdatesScript
@@ -294,10 +300,9 @@ in {
           "custom/nix-updates" = {
             format = "{}";
             exec = "cat ~/.cache/nix-update/waybar.json";
-            on-click = "nix-updates";
-            on-right-click = "cat ~/.cache/nix-update/waybar.json";
+            on-click = "cat ~/.cache/nix-update/waybar.json";
             return-type = "json";
-            interval = 0;
+            interval = 960;
           };
 
           mpris = {

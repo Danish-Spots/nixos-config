@@ -123,13 +123,13 @@
 
   # Fish
   programs.fish.enable = true;
-
-  # Nvidia
-  hardware.graphics.enable = true;
-  services.xserver.videoDrivers = ["nvidia"];
-  hardware.nvidia.open = true;
-  hardware.nvidia-container-toolkit.mount-nvidia-executables = true;
-
+  
+  # AMD GPU
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
+  
   # Extra features
   features.thunar.enable = true;
   features.steam.enable = true;

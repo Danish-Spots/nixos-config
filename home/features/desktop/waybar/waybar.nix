@@ -8,7 +8,6 @@
 with lib; let
   cfg = config.features.desktop.waybar;
   nixUpdatesScript = pkgs.writeShellScriptBin "nix-updates" (builtins.readFile ./nix-os-updates.sh);
-  nvidiaUtilScript = pkgs.writeShellScriptBin "nvidia-util" (builtins.readFile ./nvidia-util.sh);
 in {
   options.features.desktop.waybar.enable = mkEnableOption "enable waybar and config";
   options.features.desktop.waybar.hyprlandIntegration.enable = mkEnableOption "enable hyprland integration in waybar";
@@ -22,7 +21,6 @@ in {
     home.packages = [
       pkgs.wttrbar
       nixUpdatesScript
-      nvidiaUtilScript
     ];
     programs.waybar = {
       enable = true;
@@ -167,7 +165,7 @@ in {
             box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
         }
 
-        #custom-notification, #clock, #custom-weather, #user, #cpu, #memory, #network, #privacy, #custom-nvidia, #custom-nix-updates {
+        #custom-notification, #clock, #custom-weather, #user, #cpu, #memory, #network, #privacy, #custom-nix-updates {
             padding: 0 5px;
             color: @color7;
             transition: all .3s ease;
@@ -177,7 +175,7 @@ in {
             margin-right: 15px;
         }
 
-        #custom-nvidia,
+      
         #cpu,
         #memory,
         #network,
@@ -185,9 +183,6 @@ in {
         #clock {
             margin-left: 15px;
             margin-right: 15px;
-        }
-        #custom-nvidia {
-            margin-left: 5px;
         }
 
         /* Hover */
@@ -198,7 +193,6 @@ in {
         #network:hover,
         #custom-weather:hover,
         #custom-notification:hover,
-        #custom-nvidia:hover,
         #user:hover,
         #custom-nix-updates:hover,
         #clock:hover {
@@ -218,7 +212,6 @@ in {
           modules-left = ["group/left" "mpris"];
           modules-center = ["hyprland/workspaces"];
           modules-right = [
-            "custom/nvidia"
             "privacy"
             "cpu"
             "memory"
@@ -291,12 +284,6 @@ in {
             ];
           };
 
-          "custom/nvidia" = {
-            format = "{}";
-            interval = 2;
-            return-type = "json";
-            exec = "nvidia-util";
-          };
           "custom/nix-updates" = {
             format = "{}";
             exec = "cat ~/.cache/nix-update/waybar.json";

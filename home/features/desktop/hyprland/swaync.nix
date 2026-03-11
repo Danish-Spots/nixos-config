@@ -12,15 +12,13 @@ in {
     wayland.windowManager.hyprland.settings = {
       layerrule = [
         # Layer rules
-        "blur, swaync-control-center"
-        "blur, swaync-notification-window"
-        "ignorezero, swaync-control-center"
-        "ignorezero, swaync-notification-window"
-        "ignorealpha 0.4, swaync-control-center"
-        "ignorealpha 0.4, swaync-notification-window"
+        "blur on, match:namespace swaync-control-center"
+        "blur on, match:namespace swaync-notification-window"
+        "ignore_alpha 0.4, match:namespace swaync-control-center"
+        "ignore_alpha 0.4, match:namespace swaync-notification-window"
 
-        "animation slide right, swaync-control-center"
-        "animation slide right, swaync-notification-window"
+        "animation slide right, match:namespace swaync-control-center"
+        "animation slide right, match:namespace swaync-notification-window"
       ];
     };
   };

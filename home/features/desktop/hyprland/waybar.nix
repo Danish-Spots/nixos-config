@@ -12,9 +12,8 @@ in {
     wayland.windowManager.hyprland.settings = {
       layerrule = [
         # Layer rules
-        "blur, waybar"
-        "ignorezero, waybar"
-        "ignorealpha 0.5, waybar"
+        "blur on, match:namespace waybar"
+        "ignore_alpha 0.5, match:namespace waybar"
       ];
     };
   };

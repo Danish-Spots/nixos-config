@@ -12,13 +12,13 @@ in {
     wayland.windowManager.hyprland.settings = {
       windowrule = [
         #polkit agent rules
-        "pin,class:gay.vaskel.soteria"
-        "center,class:gay.vaskel.soteria"
-        "stayfocused,class:gay.vaskel.soteria"
-        "opaque,class:gay.vaskel.soteria"
-        "noscreenshare,class:gay.vaskel.soteria"
-        "dimaround,class:gay.vaskel.soteria"
-        "xray,class:gay.vaskel.soteria"
+        "pin on, match:class gay.vaskel.soteria"
+        "center on, match:class gay.vaskel.soteria"
+        "stay_focused on, match:class gay.vaskel.soteria"
+        "opaque on, match:class gay.vaskel.soteria"
+        "no_screen_share on, match:class gay.vaskel.soteria"
+        "dim_around on, match:class gay.vaskel.soteria"
+        "xray on, match:class gay.vaskel.soteria"
       ];
     };
   };

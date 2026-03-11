@@ -136,12 +136,12 @@ in {
         ];
 
         windowrule = [
-          "float, title:Open File"
-          "float, title:branchdialog"
+          "float on, match:title Open File"
+          "float on, match:title branchdialog"
         ];
 
         layerrule = [
-          "noanim, selection"
+          "no_anim on, match:namespace selection"
         ];
       };
     };

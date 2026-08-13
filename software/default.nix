@@ -9,6 +9,5 @@
   home.packages = with pkgs; [
     git
     fastfetch
-    ghostty
   ];
 }

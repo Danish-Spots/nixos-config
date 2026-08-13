@@ -3,6 +3,10 @@
 {
   programs.vscode = {
     profiles.default = {
+      extensions = with pkgs.vscode-extensions; [
+        jnoortheen.nix-ide
+      ];
+
       userSettings = {
         "git.enableSmartCommit" = true;
         "git.confirmSync" = false;
@@ -33,7 +37,7 @@
       };
     };
   };
-  
+
   home.packages = with pkgs; [
     nixd
     alejandra

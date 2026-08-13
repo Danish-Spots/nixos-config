@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
     home-manager = {
@@ -6,10 +6,16 @@
         useUserPackages = true;
 
         users.justin = {
-            home.username = "justin";
-            home.homeDirectory = "/home/justin";
+            home = {
+                username = "justin";
+                homeDirectory = "/home/justin";
 
-            home.stateVersion = "26.05";
+                stateVersion = "26.05";
+
+                packages = with pkgs; [
+                    fastfetch
+                ];
+            };
         };
     };
 }

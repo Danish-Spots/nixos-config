@@ -7,7 +7,7 @@
 
         users.justin = {
             imports = [
-                ../software/vscode.nix
+                ../software
             ];
 
             home = {

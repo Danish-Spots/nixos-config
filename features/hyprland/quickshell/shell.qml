@@ -17,8 +17,8 @@ ShellRoot {
     }
 
     FloatingWindow {
-        width: 500
-        height: 300
+        implicitWidth: 500
+        implicitHeight: 300
         visible: root.launcherVisible
 
         Rectangle {

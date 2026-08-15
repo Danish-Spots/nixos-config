@@ -16,6 +16,7 @@
         "Lua.diagnostics.globals" = [
           "hl"
         ];
+        "qt-qml.qmlls.customExePath" = "/etc/profiles/per-user/justin/bin/qmlls";
         "git.enableSmartCommit" = true;
         "git.confirmSync" = false;
         "nix.enableLanguageServer" = true;

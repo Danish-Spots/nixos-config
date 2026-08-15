@@ -13,9 +13,9 @@ in
       enable = true;
       withUWSM = true;
     };
+    
+    home-manager.sharedModules = [
+      ./home.nix
+    ];
   };
-
-  home-manager.sharedModules = [
-    ./home.nix
-  ];
 }

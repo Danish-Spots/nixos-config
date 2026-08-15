@@ -1,4 +1,4 @@
-require(./default.lua)
+require("default-ux")
 
 local mainMod = "SUPER"
 

@@ -14,11 +14,16 @@
     
     settings = {
       "$mod" = "SUPER";
+      
+      exec-once = [
+        "quickshell"
+      ];
 
       bind = [
         "$mod, q, exec, kitty"
         "$mod, c, killactive"
         "$mod, m, exit"
+        "$mod, SPACE, exec, qs ipc call launcher toggle"
       ];
     };
   };

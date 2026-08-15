@@ -1,12 +1,25 @@
 import QtQuick
 import QtQuick.Controls
-import QuickShell
+import Quickshell
+import Quickshell.Io
 
 ShellRoot {
+    id: root
+
+    property bool launcherVisible: false
+
+    IpcHandler {
+        target: "launcher"
+
+        function toggle(): void {
+            root.launcherVisible = !root.launcherVisible
+        }
+    }
+
     FloatingWindow {
         width: 500
         height: 300
-        visible: true
+        visible: root.launcherVisible
 
         Rectangle {
             anchors.fill: parent
@@ -20,7 +33,8 @@ ShellRoot {
                     text:  "Firefox"
 
                     onClicked: {
-                        Quickshell.execDetached(["firefox])
+                        Quickshell.execDetached(["firefox"])
+                        root.launcherVisible = false
                     }
                 }
 
@@ -28,7 +42,8 @@ ShellRoot {
                     text: "VS Code"
 
                     onClicked: {
-                        Quickshell.execDetached(["code])
+                        Quickshell.execDetached(["code"])
+                        root.launcherVisible = false
                     }
                 }
             }

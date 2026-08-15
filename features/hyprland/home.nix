@@ -13,7 +13,13 @@
     enable = true;
     
     settings = {
-      # Config here
+      "$mod" = "SUPER";
+
+      bind = [
+        "$mod, q, exec, kitty"
+        "$mod, c, killactive"
+        "$mod, m, exit"
+      ];
     };
   };
 }

@@ -10,6 +10,12 @@
       ];
 
       userSettings = {
+        "Lua.workspace.library" = [
+          "/usr/share/hypr/stubs"
+        ];
+        "Lua.diagnostics.globals" = [
+          "hl"
+        ];
         "git.enableSmartCommit" = true;
         "git.confirmSync" = false;
         "nix.enableLanguageServer" = true;

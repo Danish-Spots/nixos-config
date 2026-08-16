@@ -15,7 +15,6 @@ PanelWindow {
     property real launcherHeight: 500
 
     implicitWidth: launcherWidth
-    implicitHeight: launcherHeight
 
     color: "transparent"
 
@@ -24,10 +23,7 @@ PanelWindow {
 
     anchors {
         top: true
-    }
-
-    margins {
-        top: 8
+        bottom: true
     }
 
     Theme {
@@ -61,10 +57,11 @@ PanelWindow {
     Rectangle {
         id: island
 
-        anchors {
-            top: parent.top
-            horizontalCenter: parent.horizontalCenter
-        }
+        anchors.horizontalCenter: parent.horizontalCenter
+
+        y: root.launcherVisible
+            ? (root.height - root.launcherHeight) / 2
+            : 8
 
         width: root.launcherVisible
             ? root.launcherWidth
@@ -92,6 +89,13 @@ PanelWindow {
         }
 
         Behavior on height {
+            NumberAnimation {
+                duration: appTheme.motionSlow
+                easing.type: Easing.OutCubic
+            }
+        }
+
+        Behavior on y {
             NumberAnimation {
                 duration: appTheme.motionSlow
                 easing.type: Easing.OutCubic

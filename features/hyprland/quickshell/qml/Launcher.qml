@@ -1,130 +1,88 @@
 import QtQuick
-import QtQuick.Controls
 import Quickshell
 import Quickshell.Io
+import Quickshell.Wayland
 
-ShellRoot {
-    id: root
+PanelWindow {
+    id: launcher
 
     property bool launcherVisible: true
+    implicitWidth: 700
+    implicitHeight: 500
+
+    Theme {
+        id: appTheme
+    }
 
     IpcHandler {
         target: "launcher"
 
         function toggle(): void {
-            root.launcherVisible = !root.launcherVisible
+            launcher.launcherVisible = !launcher.launcherVisible
         }
     }
+    
+    WlrLayershell.keyboardFocus: launcherVisible
+        ? WlrKeyboardFocus.Exclusive
+        : WlrKeyboardFocus.None
 
-    FloatingWindow {
-        implicitWidth: 500
-        implicitHeight: 300
-        visible: root.launcherVisible
+    focusable: true
+    visible: launcherVisible
+
+    onLauncherVisibleChanged: {
+        if (launcherVisible) {
+            Qt.callLater(() => search.forceActiveFocus())
+        } else {
+            search.text = ""
+        }
+    }
+    color: "transparent"
+    Rectangle {
+        anchors.fill: parent
+        
+         color: appTheme.background
+        radius: appTheme.radiusXl
+
+        border {
+            width: 1
+            color: appTheme.borderSubtle
+        }
         
 
         Column {
             anchors.fill: parent
-            anchors.margins: 16
-            spacing: 12
+            anchors.margins: appTheme.spacingLg
 
-            TextField {
+            spacing: appTheme.spacingMd
+            LauncherSearch {
                 id: search
                 width: parent.width
-                placeholderText: "Search apps..."
 
-                Keys.onPressed: event => {
-                    let value = 0
-                    switch (event.key) {
-                        case Qt.Key_Down:
-                            value = 1
-                            break
-                        case Qt.Key_Up:
-                            value = -1
-                            break
-                        case Qt.Key_Escape:
-                            root.launcherVisible = false
-                            event.accepted = true
-                            return
-                        default:
-                            return
-                    }
+                theme: appTheme
 
-                    if (appList.count > 0) {
-                        appList.currentIndex =
-                            Math.min(appList.currentIndex + value, appList.count - 1)
-                        
-                        event.accepted = true
-                    }
+                onMoveSelection: delta => {
+                    appList.moveSelection(delta)
                 }
 
-                onAccepted: {
-                    if (appList.currentItem) {
-                        appList.currentItem.launch()
-                    }
+                onLaunchSelected: {
+                    appList.launchSelected()
                 }
 
-                onTextChanged: {
-                    appList.currentIndex = 0
+                onCloseRequested: {
+                    launcher.launcherVisible = false
                 }
             }
-    
-            ListView {
+
+            LauncherAppList {
                 id: appList
-
-                height: parent.height - search.height - parent.spacing
+                theme: appTheme
                 width: parent.width
+                height: parent.height - search.height
 
-                model: ScriptModel { 
-                    values: DesktopEntries.applications.values.filter((app) => {
-                        const query = search.text.toLowerCase()
+                query: search.text
 
-                        if (query.length) {
-                            const matchesName =
-                                app.name.toLowerCase().includes(query)
-
-                            const matchesKeywords =
-                                app.keywords.some(keyword =>
-                                    keyword.toLowerCase().includes(query)
-                                )
-
-                            return matchesName || matchesKeywords
-                        }                 
-                        return true
-                    })
-                }
-
-                delegate: ItemDelegate {
-                    required property var modelData
-
-                    width: appList.width
-
-                    function launch() {
-                        modelData.execute()
-                        root.launcherVisible = false
-                    }
-
-                    onClicked: launch()
-
-                    highlighted: ListView.isCurrentItem
-
-                    contentItem: Row {
-                        spacing: 16
-                        Image {
-                            source: Quickshell.iconPath(modelData.icon)
-                            width: 64
-                            height: 64
-
-                            anchors.verticalCenter: parent.verticalCenter
-                            fillMode: Image.PreserveAspectFit
-                        }
-
-                        Text {
-                            anchors.verticalCenter: parent.verticalCenter
-                            text: modelData.name
-
-                            font.pixelSize: 16
-                        }
-                    }
+                onAppLaunched: {
+                    launcher.launcherVisible = false
                 }
             }
         }

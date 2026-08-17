@@ -11,10 +11,12 @@ hl.monitor({
 
 hl.on("hyprland.start", function()
     hl.exec_cmd("quickshell")
+    hl.exec_cmd("hyprpaper")
 end)
 
 hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd("kitty"))
 hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd("qs ipc call launcher toggle"))
+hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd("qs -p ~/Dev/shell-island/shell.qml ipc call launcher toggle"))
 hl.bind(mainMod .. " + C", hl.dsp.window.close())
 hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 
